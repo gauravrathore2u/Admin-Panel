@@ -11,12 +11,20 @@ import FitbitIcon from '@mui/icons-material/Fitbit';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { DarkModeContext } from '../../contextapi/darkModeContext';
 
 function Sidebar() {
+
+    const {dispatch} = useContext(DarkModeContext)
+
     return (
         <div className='sidebar'>
             <div className='top'>
-                <span className='logo'>GRV Admin</span>
+                <Link to='/' style={{textDecoration:"none"}}>
+                    <span className='logo'>Hi! Admin</span>
+                </Link>
             </div>
             <hr />
             <div className='center'>
@@ -27,14 +35,18 @@ function Sidebar() {
                         <span>Dashboard</span>
                     </li>
                     <p className="title">LISTS</p>
+                    <Link to='/users' style={{textDecoration:"none"}}>
                     <li>
                         <PersonIcon className='icon' />
-                        <span>User</span>
+                        <span>Users</span>
                     </li>
+                    </Link>
+                    <Link to='/products' style={{textDecoration:"none"}}>
                     <li>
                         <StoreIcon className='icon' />
                         <span>Products</span>
                     </li>
+                    </Link>
                     <li>
                         <Inventory2Icon className='icon' />
                         <span>Orders</span>
@@ -79,8 +91,8 @@ function Sidebar() {
                 </ul>
             </div>
             <div className='bottom'>
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
+                <div className="colorOption" onClick={()=>dispatch({type:'LIGHT'})}></div>
+                <div className="colorOption" onClick={()=>dispatch({type:'DARK'})}></div>
             </div>
         </div>
     )
